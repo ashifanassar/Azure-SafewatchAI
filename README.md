@@ -25,28 +25,6 @@ The LLM proposes. Deterministic policy disposes. A human approves.
 
 Every consequential action, including escalation, closure, and contractor flagging, passes through governance rules and the required human gate.
 
-## Architecture Diagram
-
-The Mermaid source is in [docs/architecture-diagram.mmd](docs/architecture-diagram.mmd).
-
-```mermaid
-flowchart LR
-    A["Site Evidence"] --> B["Azure Blob Storage"]
-    B --> C["Azure Event Grid"]
-    C --> D["Azure Container Apps<br/>Agent Orchestrator"]
-    D --> E["Vision Agent"]
-    D --> F["Document Agent"]
-    D --> G["Compliance RAG Agent"]
-    E --> H["Risk Scoring Agent"]
-    F --> H
-    G --> H
-    H --> I["Governance Agent"]
-    I --> J["Report Agent"]
-    J --> K["Human Approval<br/>Logic Apps"]
-    K --> L["Cosmos DB<br/>Incident + Audit Store"]
-    L --> M["Operations Console"]
-    L --> N["Governance Dashboard"]
-```
 
 ## Production Hardening Path
 
