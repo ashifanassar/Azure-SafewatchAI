@@ -1,0 +1,113 @@
+flowchart TB
+    PRINCIPLE["Architecture principle<br/>The LLM proposes. Deterministic policy disposes. A human approves."]
+
+    subgraph V1["V1 BUILD SCOPE - WHAT WE IMPLEMENT"]
+        direction TB
+
+        subgraph UI["Two User Interfaces"]
+            OPS["Operations Console<br/>Upload evidence, review AI output, submit incident"]
+            GOVD["Governance Dashboard<br/>Risk queue, approvals, audit trail, Model Ops tab"]
+        end
+
+        subgraph INGEST["Evidence Ingestion"]
+            IMG["Site image<br/>Static PPE photo"]
+            PERMIT["Permit / safety document"]
+            META["Site metadata<br/>zone, work type, contractor"]
+            BLOB["Azure Blob Storage<br/>image + document landing zone"]
+            EVENT["Azure Event Grid<br/>batch evidence trigger"]
+        end
+
+        subgraph RUNTIME["Agent Runtime"]
+            API["FastAPI backend<br/>incident + approval APIs"]
+            ORCH["Azure Container Apps<br/>LangGraph orchestrator"]
+            CONTRACTS["Typed Pydantic contracts<br/>Detection, PermitValidation,<br/>RegulationCitation, RiskAssessment,<br/>GovernanceDecision, IncidentRecord, AuditEvent"]
+        end
+
+        subgraph AGENTS["Six-Agent Governance Chain"]
+            INGESTA["Ingestion / Orchestrator"]
+            VISIONA["Vision Agent<br/>PPE + hazard detection"]
+            DOCA["Document Agent<br/>permit validation"]
+            RAGA["Compliance RAG Agent<br/>grounded clauses + citations"]
+            RISK["Risk Scoring Agent<br/>weighted score 0-100"]
+            POLICY["Governance Agent<br/>deterministic policy engine"]
+            REPORT["Report Agent<br/>cited reviewer packet"]
+        end
+
+        subgraph AISERVICES["Azure AI Services"]
+            AIVISION["Azure AI Vision / custom PPE endpoint"]
+            DOCINT["Azure AI Document Intelligence"]
+            SEARCH["Azure AI Search<br/>regulatory corpus index"]
+            EMBED["text-embedding-3-large<br/>regional Standard where available"]
+            CHAT["Azure OpenAI chat model<br/>GlobalStandard in UAE North"]
+            KB["Regulatory corpus<br/>OSHAD, TRAKHEES, MOMRA, ISO 45001"]
+        end
+
+        subgraph GOVERNANCE["Human Gate + Policy Rules"]
+            OVERRIDE["Hard overrides first<br/>expired permit blocks closure<br/>contractor threshold escalates"]
+            BANDS["Risk bands<br/>Risk < 30: auto-log<br/>30-59: Safety Officer<br/>60-79: HSE Manager<br/>>= 80: Escalation Committee"]
+            HITL["Azure Logic Apps<br/>approval routing + Teams/email"]
+        end
+
+        subgraph STORE["System of Record"]
+            COSMOS["Azure Cosmos DB Core SQL API<br/>incident records, audit trail,<br/>agent outputs, policy/model versions"]
+            AUDIT["Audit trail<br/>correlation_id, agent_run_id,<br/>model version, prompt version,<br/>policy version, human decision"]
+        end
+
+        subgraph OPSX["Production-Grade v1 Controls"]
+            MI["Managed Identity<br/>no keys in code"]
+            KV["Azure Key Vault<br/>secrets/config"]
+            APPINS["Application Insights<br/>trace every agent call"]
+            RESILIENCE["Retry + timeout handling<br/>model and service calls"]
+            CI["CI + tests<br/>contract tests, policy tests, workflow tests"]
+        end
+    end
+
+    PRINCIPLE --> V1
+    OPS --> API
+    GOVD --> API
+    IMG --> BLOB
+    PERMIT --> BLOB
+    META --> API
+    BLOB --> EVENT
+    EVENT --> API
+    API --> ORCH
+    ORCH --> CONTRACTS
+    ORCH --> INGESTA
+    INGESTA --> VISIONA
+    INGESTA --> DOCA
+    VISIONA --> AIVISION
+    DOCA --> DOCINT
+    RAGA --> SEARCH
+    RAGA --> CHAT
+    SEARCH --> EMBED
+    KB --> SEARCH
+    AIVISION --> RISK
+    DOCINT --> RISK
+    SEARCH --> RISK
+    RISK --> POLICY
+    POLICY --> OVERRIDE
+    OVERRIDE --> BANDS
+    BANDS --> REPORT
+    REPORT --> HITL
+    HITL --> COSMOS
+    COSMOS --> AUDIT
+    COSMOS --> GOVD
+    COSMOS --> OPS
+    MI --> API
+    MI --> ORCH
+    KV --> API
+    APPINS --> ORCH
+    RESILIENCE --> ORCH
+    CI --> CONTRACTS
+
+    subgraph HARDEN["PRODUCTION HARDENING PATH - DRAWN, NOT BUILT IN V1"]
+        FD["Azure Front Door + WAF<br/>external traffic, TLS, DDoS, geo-filtering"]
+        APIM["Azure API Management<br/>multiple external consumers, quotas, versioning"]
+        SB["Azure Service Bus<br/>continuous stream volume, decoupling, backpressure"]
+        LAKE["Audit Data Lake<br/>long-term analytics and traceability"]
+        WATCHER["Watcher Agent<br/>recurring violations, site risk, contractor trends"]
+        PRED["Predictive Safety Layer<br/>risk forecasting and preventive recommendations"]
+        RBAC["Production RBAC / multi-tenant controls<br/>phase 2+"]
+    end
+
+    V1 -. "defer until v1 proves the governance loop" .-> HARDEN

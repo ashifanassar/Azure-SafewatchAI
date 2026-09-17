@@ -1,0 +1,20 @@
+[project]
+name = "safewatch-ai"
+version = "0.1.0"
+description = "SafeWatch AI v1 agentic site safety governance platform."
+requires-python = ">=3.12"
+dependencies = [
+  "azure-cosmos>=4.7",
+  "azure-ai-documentintelligence>=1.0",
+  "azure-identity>=1.17",
+  "azure-storage-blob>=12.20",
+  "fastapi>=0.115",
+  "langgraph>=0.2",
+  "langsmith>=0.1.95",
+  "pydantic>=2.0",
+  "uvicorn[standard]>=0.30",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["packages/contracts/src", "apps/api/src"]
+testpaths = ["tests"]

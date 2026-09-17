@@ -1,0 +1,148 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="UtDUNtkL5FOzW1B7VmBb" name="Page-1">
+    <mxGraphModel dx="2538" dy="1102" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;flowchart TD\n  subgraph Ingestion\n    Blob[Blob Storage]\n    Event[Event Grid]\n    Blob --&gt; Event\n  end\n\n  Orchestrator[LangGraph Workflow Engine]:::orchestrator\n\n  subgraph Agents [Agent Layer]\n    direction LR\n    Vision[Vision Agent]:::agent\n    Doc[Document Agent]:::agent\n    Comp[Compliance RAG Agent]:::agent\n  end\n\n  Risk[Risk Scoring Agent]:::scoring\n  Gov[Governance Agent + HITL]:::gov\n  Store[(Incident + Audit Store)]:::storage\n\n  Event --&gt; Orchestrator\n  Orchestrator --&gt; Vision\n  Orchestrator --&gt; Doc\n  Orchestrator --&gt; Comp\n  Vision --&gt; Risk\n  Doc --&gt; Risk\n  Comp --&gt; Risk\n  Risk --&gt; Gov\n  Gov --&gt; Store\n\n  subgraph Hardening [Production hardening - deferred from v1]\n    direction TB\n    AFD[Azure Front Door]\n    WAF[WAF]\n    APIM[API Management]\n    SB[Service Bus]\n    WA[Watcher Agent]\n    PS[Predictive Safety]\n    AFD --&gt; WAF --&gt; APIM --&gt; SB --&gt; WA --&gt; PS\n  end\n\n  Orchestrator -.-&gt; Hardening\n\n  \n  style Hardening stroke-dasharray: 5 5\n  style Hardening fill:#fafafa,stroke:#9e9e9e&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="2SJdnsTYc9HuT0iGpho3-89">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry height="2150" width="1183" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Layer 2:Ingestion" mermaidId="n:Ingestion" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Ingestion" id="2SJdnsTYc9HuT0iGpho3-90">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-89" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="228" width="813" x="280" y="940" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Azure Blob Storage" mermaidId="n:Blob" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Blob Storage" id="2SJdnsTYc9HuT0iGpho3-91">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-90" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="770" x="20" y="45" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Azure Event Grid" mermaidId="n:Event" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Event Grid" id="2SJdnsTYc9HuT0iGpho3-92">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-90" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="760" x="20" y="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-93" edge="1" parent="2SJdnsTYc9HuT0iGpho3-90" source="2SJdnsTYc9HuT0iGpho3-91" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.498;entryY=0.658;entryDx=0;entryDy=0;entryPerimeter=0;" target="2SJdnsTYc9HuT0iGpho3-90">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Layer3 &amp;amp; 4:AI and Orchestration" mermaidId="n:Agents" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Agent Layer" id="2SJdnsTYc9HuT0iGpho3-94">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-89" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="363" width="850" x="280" y="1270" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="RAG Agent Azure AI search+OpenAI" mermaidId="n:Comp" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Compliance RAG Agent" id="2SJdnsTYc9HuT0iGpho3-95">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-94" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="85.9736842105263" width="237.2093023255814" x="-13.343023255813955" y="103.50396291135169" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-96" edge="1" parent="2SJdnsTYc9HuT0iGpho3-94" source="2SJdnsTYc9HuT0iGpho3-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="2SJdnsTYc9HuT0iGpho3-95">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="LangGraph Workflow Engine" mermaidId="n:Orchestrator" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="LangGraph Workflow Engine" id="2SJdnsTYc9HuT0iGpho3-97">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-94" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="49.63469387755102" width="227.1575581395349" x="286.42511627906975" y="53.86448979591837" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-98" edge="1" parent="2SJdnsTYc9HuT0iGpho3-94" source="2SJdnsTYc9HuT0iGpho3-99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2SJdnsTYc9HuT0iGpho3-101">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Document Agent Azure AI Document Intellegence" mermaidId="n:Doc" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Document Agent" id="2SJdnsTYc9HuT0iGpho3-99">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-94" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="39.92260692464358" width="209.83139534883725" x="303.75127906976746" y="149.55920570264766" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-100" edge="1" parent="2SJdnsTYc9HuT0iGpho3-94" source="2SJdnsTYc9HuT0iGpho3-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.462;entryY=0.068;entryDx=0;entryDy=0;entryPerimeter=0;" target="2SJdnsTYc9HuT0iGpho3-99">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-129" edge="1" parent="2SJdnsTYc9HuT0iGpho3-94" source="2SJdnsTYc9HuT0iGpho3-101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="404.0100000000002" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="Report Agnet" mermaidId="n:Risk" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Risk Scoring Agent" id="2SJdnsTYc9HuT0iGpho3-101">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-94" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="190" x="309.01" y="286" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-102" edge="1" parent="2SJdnsTYc9HuT0iGpho3-94" source="2SJdnsTYc9HuT0iGpho3-95" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="2SJdnsTYc9HuT0iGpho3-101">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="" mermaidId="e:Event-&gt;Orchestrator#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="2SJdnsTYc9HuT0iGpho3-116">
+          <mxCell edge="1" parent="2SJdnsTYc9HuT0iGpho3-89" source="2SJdnsTYc9HuT0iGpho3-92" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="2SJdnsTYc9HuT0iGpho3-97">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-118" edge="1" parent="2SJdnsTYc9HuT0iGpho3-89" source="2SJdnsTYc9HuT0iGpho3-119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="2SJdnsTYc9HuT0iGpho3-101">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="&amp;nbsp;Vision Agent&amp;nbsp; Azure AI Vision&amp;nbsp;" mermaidId="n:Vision" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Vision Agent" id="2SJdnsTYc9HuT0iGpho3-119">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-89" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="203.5" x="866.5" y="1460" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-120" edge="1" parent="2SJdnsTYc9HuT0iGpho3-89" source="2SJdnsTYc9HuT0iGpho3-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="2SJdnsTYc9HuT0iGpho3-119">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-130" edge="1" parent="2SJdnsTYc9HuT0iGpho3-89" source="2SJdnsTYc9HuT0iGpho3-121" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="484" y="1930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-131" edge="1" parent="2SJdnsTYc9HuT0iGpho3-89" source="2SJdnsTYc9HuT0iGpho3-121" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="2SJdnsTYc9HuT0iGpho3-127">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="890" y="1930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="Layer 5:Governance" mermaidId="n:Ingestion" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Ingestion" id="2SJdnsTYc9HuT0iGpho3-121">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-89" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="140" width="813" x="280" y="1710" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Layer 6:HITL" mermaidId="n:Ingestion" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Ingestion" id="2SJdnsTYc9HuT0iGpho3-124">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-89" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="150" width="813" x="280" y="1940" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Azure Logic App &amp;amp; Routing" mermaidId="n:Event" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Event Grid" id="2SJdnsTYc9HuT0iGpho3-126">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-124" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="35.45" width="303" x="41.5" y="28.835714285714282" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Azure CosmosDB Incident &amp;amp; Audit" mermaidId="n:Store" mermaidBaseStyle="html=1;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Incident + Audit Store" id="2SJdnsTYc9HuT0iGpho3-127">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-124" style="html=1;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="47.857142857142854" width="171" x="521.5" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-138" edge="1" parent="2SJdnsTYc9HuT0iGpho3-124" source="2SJdnsTYc9HuT0iGpho3-126" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="2SJdnsTYc9HuT0iGpho3-127">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Governance Agent + Deterministic Policy Agent" mermaidId="n:Event" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Event Grid" id="2SJdnsTYc9HuT0iGpho3-123">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-89" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="303" x="620" y="1796" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Risk Scoring Agent" mermaidId="n:Blob" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Blob Storage" id="2SJdnsTYc9HuT0iGpho3-122">
+          <mxCell parent="2SJdnsTYc9HuT0iGpho3-89" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="30" width="310" x="540" y="1740" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-128" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="FrontEnd Apps" vertex="1">
+          <mxGeometry height="60" width="780" x="330" y="2180" as="geometry" />
+        </mxCell>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-132" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Risk&amp;gt;=30" vertex="1">
+          <mxGeometry height="30" width="60" x="460" y="1870" as="geometry" />
+        </mxCell>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-133" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Risk &amp;lt;=30" vertex="1">
+          <mxGeometry height="30" width="60" x="870" y="1860" as="geometry" />
+        </mxCell>
+        <mxCell id="2SJdnsTYc9HuT0iGpho3-139" edge="1" parent="1" source="2SJdnsTYc9HuT0iGpho3-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.705;entryY=-0.047;entryDx=0;entryDy=0;entryPerimeter=0;" target="2SJdnsTYc9HuT0iGpho3-128">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,2 @@
+"""SafeWatch AI backend package."""
+

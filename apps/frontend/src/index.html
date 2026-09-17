@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SafeWatch AI</title>
+    <link rel="stylesheet" href="./styles.css?v=ui-v23-audit-trail" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">SW</div>
+          <div>
+            <h1>SafeWatch AI</h1>
+            <p>Agentic HSE governance</p>
+          </div>
+        </div>
+        <nav class="nav-tabs" aria-label="Primary">
+          <button class="tab is-active" data-view="operations">Operations Console</button>
+          <button class="tab" data-view="governance">Governance Dashboard</button>
+          <button class="tab" data-view="modelops">Model Ops</button>
+        </nav>
+        <section class="api-panel">
+          <label for="apiUrl">Backend API</label>
+          <input id="apiUrl" type="url" />
+          <button id="saveApi" class="secondary">Save</button>
+          <div id="apiStatus" class="status-pill">Checking</div>
+        </section>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">SafeWatch v1</p>
+            <h2 id="viewTitle">Operations Console</h2>
+          </div>
+          <button id="refreshStatus" class="icon-action" title="Refresh API status">Refresh</button>
+        </header>
+
+        <section id="operations" class="view is-visible">
+          <div class="panel-grid">
+            <section class="panel input-panel">
+              <div class="section-heading">
+                <h3>Work Start Intake</h3>
+                <p>Upload the work permit and site safety image captured before work begins.</p>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  Incident ID
+                  <input id="incidentId" />
+                </label>
+                <label>
+                  Site
+                  <input id="siteId" value="site-001" />
+                </label>
+                <label>
+                  Zone
+                  <input id="zoneId" value="zone-04" />
+                </label>
+                <label>
+                  Work Type
+                  <input id="workType" value="work_at_height" />
+                </label>
+                <label>
+                  Contractor
+                  <input id="contractorId" value="contractor-001" />
+                </label>
+                <label>
+                  Created By
+                  <input id="createdBy" value="ashifa" />
+                </label>
+              </div>
+
+              <div class="evidence-grid">
+                <label class="file-card">
+                  <span>Work Permit PDF</span>
+                  <input id="permitFile" type="file" accept="application/pdf,.pdf" />
+                  <small>Document Agent reads and validates permit number, work type, status, and expiry.</small>
+                </label>
+                <label class="file-card">
+                  <span>Site Safety Image</span>
+                  <input id="imageFile" type="file" accept="image/*" />
+                  <small>Vision Agent analyzes the uploaded image for PPE and work-at-height safety issues.</small>
+                </label>
+              </div>
+
+              <button id="runAnalysis" class="primary">Analyze Work Start</button>
+              <div id="uploadStatus" class="upload-status"></div>
+              <pre id="requestPreview" class="code-preview"></pre>
+            </section>
+
+            <section class="panel result-panel">
+              <div class="section-heading">
+                <h3>Workflow Result</h3>
+                <p>Risk, governance, and cited reviewer packet.</p>
+              </div>
+              <div id="emptyResult" class="empty-state">Submit a work-start package to see the governed decision.</div>
+              <div id="summaryCards" class="summary-cards hidden"></div>
+              <div id="findings" class="findings hidden"></div>
+              <div id="citations" class="citations hidden"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="governance" class="view">
+          <div class="panel-grid governance-grid">
+            <section class="panel">
+              <div class="section-heading">
+                <h3>Human Review Queue</h3>
+                <p>Pending incidents saved from this browser session.</p>
+              </div>
+              <div id="queue" class="queue-list"></div>
+              <div class="section-heading audit-heading">
+                <h3>Audit Trail</h3>
+                <p>Approval and rejection actions from this browser session.</p>
+              </div>
+              <div id="auditTrail" class="audit-list"></div>
+            </section>
+            <section class="panel">
+              <div class="section-heading">
+                <h3>Decision Detail</h3>
+                <p>Reviewer packet for the selected incident.</p>
+              </div>
+              <div id="decisionDetail" class="decision-detail empty-state">No incident selected.</div>
+            </section>
+          </div>
+        </section>
+
+        <section id="modelops" class="view">
+          <section class="panel model-panel">
+            <div class="section-heading">
+              <h3>Model Ops</h3>
+              <p>Live configuration exposed by the deployed backend.</p>
+            </div>
+            <div id="configGrid" class="config-grid"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js?v=ui-v23-audit-trail"></script>
+  </body>
+</html>

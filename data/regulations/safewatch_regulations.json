@@ -1,0 +1,47 @@
+[
+  {
+    "source": "ISO 45001",
+    "clause_id": "8.1",
+    "title": "Operational planning and control",
+    "jurisdiction": "global",
+    "document_type": "standard",
+    "version": "demo-v1",
+    "text": "Organizations should plan, implement, control, and maintain occupational health and safety processes. For hazardous work, controls should be defined before the task starts, communicated to workers, and verified by competent supervision. Work at height should include fall prevention controls, inspection of access platforms, and confirmation that required personal protective equipment is available and used."
+  },
+  {
+    "source": "ISO 45001",
+    "clause_id": "8.1.2",
+    "title": "Eliminating hazards and reducing OH&S risks",
+    "jurisdiction": "global",
+    "document_type": "standard",
+    "version": "demo-v1",
+    "text": "Risk controls should follow a hierarchy that prioritizes eliminating hazards, substituting safer methods, applying engineering controls, using administrative controls, and finally relying on personal protective equipment. Missing fall protection on scaffolds, roofs, or elevated platforms should be treated as a high-consequence condition requiring immediate control."
+  },
+  {
+    "source": "OSHAD",
+    "clause_id": "Permit-to-work",
+    "title": "Permit control before hazardous work",
+    "jurisdiction": "UAE",
+    "document_type": "regulatory_guidance",
+    "version": "demo-v1",
+    "text": "High-risk activities should not start until a valid permit-to-work has been issued, checked, and approved. The permit should identify the work type, location, contractor, hazards, required controls, validity period, and approving authority. Expired or missing permits should be escalated for HSE review before the incident can be closed."
+  },
+  {
+    "source": "OSHAD",
+    "clause_id": "Work-at-height",
+    "title": "Fall protection and access control",
+    "jurisdiction": "UAE",
+    "document_type": "regulatory_guidance",
+    "version": "demo-v1",
+    "text": "Work at height should use inspected access equipment and suitable fall protection. Workers exposed to a fall hazard should wear a full body harness connected to a suitable anchorage where collective protection is not sufficient. Missing harness, unsafe scaffold access, or lack of edge protection should trigger immediate corrective action and supervisory review."
+  },
+  {
+    "source": "ISO 45001",
+    "clause_id": "9.1",
+    "title": "Monitoring, measurement, analysis and performance evaluation",
+    "jurisdiction": "global",
+    "document_type": "standard",
+    "version": "demo-v1",
+    "text": "Organizations should monitor health and safety performance, evaluate whether controls are effective, and retain documented evidence of monitoring results. Incident reviews should keep an audit trail of detected hazards, risk assessment, approval decisions, policy versions, and corrective actions."
+  }
+]
