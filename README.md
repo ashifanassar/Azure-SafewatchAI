@@ -49,7 +49,6 @@ FastAPI / agents -> Azure Monitor + Log Analytics + Azure Workbook
 LangGraph workflow -> LangSmith tracing
 ```
 
-The Mermaid source is available in [docs/architecture-diagram.mmd](docs/architecture-diagram.mmd).
 
 ## Main Features
 
