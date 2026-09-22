@@ -8,7 +8,7 @@ SafeWatch AI v1 is an agentic HSE governance platform built on Azure. It demonst
 The platform supports work-start safety review for scenarios such as work at height, missing permit information, missing PPE, unsafe access, and escalation-based approval workflows.
 
 **Embedding Model Used:** Azure OpenAI embedding deployment `embed-safewatch-v1`  
-**LLM Used:** Azure OpenAI chat deployment `chat-safewatch-v1`
+**LLM Used:** Azure OpenAI chat deployment `GPT 5.4 Mini`
 
 ## Architecture
 
